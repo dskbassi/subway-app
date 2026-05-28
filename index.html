@@ -135,7 +135,6 @@
         <div class="product-label">Clubhouse</div>
         <div class="button-container">
             <button class="ultra-big-button" onclick="playAudio('clubhouseStep1')">FASE 1</button>
-            <div class="header" style="display:none;">Missing context fix</div>
             <button class="ultra-big-button" onclick="playAudio('clubhouseStep2')">FASE 2</button>
         </div>
     </div>
@@ -159,17 +158,15 @@
         <button onclick="closeModal()" style="background:none; border:1px solid #ccc; color:#666;">Maybe Later</button>
     </div>
 
-    <!-- FIXED STREAMING MEDIA ASSETS (://dropboxusercontent.com handles strict mobile audio containers) -->
-    <!-- <audio id="fiestaFajitaStep1" src="https://dropboxusercontent.com/scl/fi/ceey5jub2vwwzs7rus5u1/FiestaFajita.mp3?rlkey=8d5ntuug4utwtri2i4srurti0&raw=1" preload="auto"></audio> -->
+    <!-- MEDIA ASSETS (Fully hosted inside your GitHub Repository) -->
     <audio id="fiestaFajitaStep1" src="docs/assets/audio/FiestaFajita.mp3" preload="auto"></audio>
-
-    <audio id="fiestaFajitaStep2" src="https://dropboxusercontent.com/scl/fi/i6zpzcqi8ubha0pw05tk6/FiestaFajita2.mp3?rlkey=9sdpvmofilktgt71n84jcfq7c&raw=1" preload="auto"></audio>
-    <audio id="mightyBmtStep1" src="https://dropboxusercontent.com/scl/fi/ji313te128vetcbexrpy6/MightyBMT.mp3?rlkey=58b08zyevjhapqefj7iouprru&raw=1" preload="auto"></audio>
-    <audio id="mightyBmtStep2" src="https://dropboxusercontent.com/scl/fi/39fn5u3ma6d6fvtm1mngv/MightyBMT2.mp3?rlkey=xy0mbg183kk4x6lwvfrbiv6c0&raw=1" preload="auto"></audio>
-    <audio id="clubhouseStep1" src="https://dropboxusercontent.com/scl/fi/orjvt77mgm1brvaniafl6/Clubhouse.mp3?rlkey=jq10jaqbojiwrqibm3wrt2ao7&raw=1" preload="auto"></audio>
-    <audio id="clubhouseStep2" src="https://dropboxusercontent.com/scl/fi/pjaaam4ksgvh01vsxlsmz/clubhouse2.mp3?rlkey=6ksko00myeiwbuydr8z51ci99&raw=1" preload="auto"></audio>
-    <audio id="steakhouseDesireStep1" src="https://dropboxusercontent.com/scl/fi/kio4uoajdegtdmyfsi37d/SteakhouseDesire.mp3?rlkey=6eusc4ugtxx0sgj3mc3qigmbo&raw=1" preload="auto"></audio>
-    <audio id="steakhouseDesireStep2" src="https://dropboxusercontent.com/scl/fi/inqb95ntj0tt0rs73pqlh/SteakhouseDesire2.mp3?rlkey=597vkk3ls3i6kf5fpzaydevmb&raw=1" preload="auto"></audio>
+    <audio id="fiestaFajitaStep2" src="docs/assets/audio/FiestaFajita2.mp3" preload="auto"></audio>
+    <audio id="mightyBmtStep1" src="docs/assets/audio/MightyBMT.mp3" preload="auto"></audio>
+    <audio id="mightyBmtStep2" src="docs/assets/audio/MightyBMT2.mp3" preload="auto"></audio>
+    <audio id="clubhouseStep1" src="docs/assets/audio/Clubhouse.mp3" preload="auto"></audio>
+    <audio id="clubhouseStep2" src="docs/assets/audio/clubhouse2.mp3" preload="auto"></audio>
+    <audio id="steakhouseDesireStep1" src="docs/assets/audio/SteakhouseDesire.mp3" preload="auto"></audio>
+    <audio id="steakhouseDesireStep2" src="docs/assets/audio/SteakhouseDesire2.mp3" preload="auto"></audio>
 
     <script>
         let usageCount = parseInt(localStorage.getItem('subwayToolUsage')) || 0;
@@ -195,10 +192,9 @@
                 }
             });
 
-            // Mobile-Specific Fix: Force user action binding with immediate loading block invocation
+            // Priming the audio element for seamless mobile streaming
             audio.load(); 
             
-            // Native promise check to bypass browser auto-block structures safely
             var playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
@@ -218,11 +214,11 @@
         }
 
         function fakeUpgrade() {
-            alert("Thank you! (This is a demo - In the real PRO version you would be redirected to payment page)");
+            alert("Thank you for choosing PRO! Processing payment...");
             closeModal();
         }
         // Uncomment below line to reset counter when testing:
-         localStorage.removeItem('subwayToolUsage');
+        // localStorage.removeItem('subwayToolUsage');
     </script>
 </body>
 </html>
