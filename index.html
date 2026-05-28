@@ -169,7 +169,12 @@
     <audio id="steakhouseDesireStep2" src="docs/assets/audio/SteakhouseDesire2.mp3" preload="auto"></audio>
 
     <script>
-        let usageCount = parseInt(localStorage.getItem('subwayToolUsage')) || 0;
+        
+        // For testing purposes, the couter sets to zero with every page refresh.
+        let usageCount = 0;
+        // Uncomment the line below in LIVE app
+        // let usageCount = parseInt(localStorage.getItem('subwayToolUsage')) || 0; 
+        
 
         function playAudio(audioId) {
             usageCount++;
@@ -217,8 +222,6 @@
             alert("Thank you for choosing PRO! Processing payment...");
             closeModal();
         }
-        // Uncomment below line to reset counter when testing:
-        localStorage.removeItem('subwayToolUsage');
     </script>
 </body>
 </html>
