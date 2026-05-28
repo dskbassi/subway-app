@@ -1,0 +1,16 @@
+{
+  "short_name": "Subway PWA",
+  "name": "Subway Staff PWA Tool",
+  "icons": [
+    {
+      "src": "docs/assets/audio/.gitkeep",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/subway-app/pwa-demo.html",
+  "background_color": "#036b3b",
+  "theme_color": "#036b3b",
+  "display": "standalone",
+  "orientation": "portrait"
+}
