@@ -3,9 +3,9 @@
   "name": "Subway Staff PWA Tool",
   "icons": [
     {
-      "src": "docs/assets/audio/.gitkeep",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "docs/assets/images/sttLogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": "/subway-app/pwa-demo.html",
