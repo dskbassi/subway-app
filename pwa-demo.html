@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subway Staff Training Tool (PWA Demo)</title>
+    <!-- Link to the PWA configuration file -->
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #036b3b;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .product {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+
+        .product-label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #036b3b;
+            margin-bottom: 12px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .ultra-big-button {
+            flex: 1;
+            padding: 18px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            min-width: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ultra-big-button:hover {
+            background-color: #45a049;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+        }
+
+        #upgradeModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            width: 85%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        #upgradeModal h2 {
+            font-size: 22px;
+            margin-top: 0;
+        }
+
+        #upgradeModal button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        SUBWAY STAFF TRAINING TOOL (PWA DEMO)<br>
+        <small>FASE 1: Eiwitten & Kaas | FASE 2: Groenten & Bijgerechten</small>
+    </div>
+
+    <div class="product">
+        <div class="product-label">Fiesta Fajita</div>
+        <div class="button-container">
+            <button class="ultra-big-button" onclick="playAudio('fiestaFajitaStep1')">FASE 1</button>
+            <button class="ultra-big-button" onclick="playAudio('fiestaFajitaStep2')">FASE 2</button>
+        </div>
+    </div>
+
+    <div class="product">
+        <div class="product-label">Mighty BMT</div>
+        <div class="button-container">
+            <button class="ultra-big-button" onclick="playAudio('mightyBmtStep1')">FASE 1</button>
+            <button class="ultra-big-button" onclick="playAudio('mightyBmtStep2')">FASE 2</button>
+        </div>
+    </div>
+
+    <div class="product">
+        <div class="product-label">Clubhouse</div>
+        <div class="button-container">
+            <button class="ultra-big-button" onclick="playAudio('clubhouseStep1')">FASE 1</button>
+            <button class="ultra-big-button" onclick="playAudio('clubhouseStep2')">FASE 2</button>
+        </div>
+    </div>
+
+    <div class="product">
+        <div class="product-label">Steakhouse Desire</div>
+        <div class="button-container">
+            <button class="ultra-big-button" onclick="playAudio('steakhouseDesireStep1')">FASE 1</button>
+            <button class="ultra-big-button" onclick="playAudio('steakhouseDesireStep2')">FASE 2</button>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div id="overlay"></div>
+    <div id="upgradeModal">
+        <h2>🔒 Free Limit Reached (5/5)</h2>
+        <p>You have used the free version 5 times today.</p>
+        <p><strong>Upgrade to PRO</strong> for unlimited access, image guides, video tutorials & more.</p>
+        <p style="font-size: 18px; color: #036b3b;"><strong>Only €4.99 / month</strong></p>
+        <button onclick="fakeUpgrade()" style="background:#FF9900; color:white; border:none;">Upgrade to PRO</button>
+        <button onclick="closeModal()" style="background:none; border:1px solid #ccc; color:#666;">Maybe Later</button>
+    </div>
+
+    <!-- MEDIA ASSETS -->
+    <audio id="fiestaFajitaStep1" src="docs/assets/audio/FiestaFajita.mp3" preload="auto"></audio>
+    <audio id="fiestaFajitaStep2" src="docs/assets/audio/FiestaFajita2.mp3" preload="auto"></audio>
+    <audio id="mightyBmtStep1" src="docs/assets/audio/MightyBMT.mp3" preload="auto"></audio>
+    <audio id="mightyBmtStep2" src="docs/assets/audio/MightyBMT2.mp3" preload="auto"></audio>
+    <audio id="clubhouseStep1" src="docs/assets/audio/Clubhouse.mp3" preload="auto"></audio>
+    <audio id="clubhouseStep2" src="docs/assets/audio/clubhouse2.mp3" preload="auto"></audio>
+    <audio id="steakhouseDesireStep1" src="docs/assets/audio/SteakhouseDesire.mp3" preload="auto"></audio>
+    <audio id="steakhouseDesireStep2" src="docs/assets/audio/SteakhouseDesire2.mp3" preload="auto"></audio>
+
+    <script>
+        // For demo/testing purposes, the couter sets to zero with every page refresh.
+        let usageCount = 0;
+        // Uncomment the line below in LIVE app
+        // let usageCount = parseInt(localStorage.getItem('subwayToolUsage')) || 0; 
+      
+        function playAudio(audioId) {
+            usageCount++;
+
+            const audio = document.getElementById(audioId);
+
+            if (usageCount > 5) {
+                showUpgradeModal();
+                usageCount = 5; 
+                return;
+            }
+
+            document.querySelectorAll('audio').forEach(a => {
+                if (!a.paused) {
+                    a.pause();
+                    a.currentTime = 0;
+                }
+            });
+
+            audio.load(); 
+            
+            var playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Playback blocked: ", error);
+                });
+            }
+        }
+
+        function showUpgradeModal() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('upgradeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('upgradeModal').style.display = 'none';
+        }
+
+        function fakeUpgrade() {
+            alert("Thank you for choosing PRO! Processing payment...");
+            closeModal();
+        }
+
+        // PWA Background Activation Script
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('PWA active!', reg))
+                    .catch(err => console.log('PWA registration failed', err));
+            });
+        }
+    </script>
+</body>
+</html>
